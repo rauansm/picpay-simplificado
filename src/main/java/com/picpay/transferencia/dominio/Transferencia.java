@@ -1,5 +1,10 @@
 package com.picpay.transferencia.dominio;
 
+import com.picpay.autorizador.application.service.AutorizadorService;
+import com.picpay.handler.APIException;
+import com.picpay.transferencia.application.api.TransferenciaRequest;
+import com.picpay.usuario.dominio.TipoUsuario;
+import com.picpay.usuario.dominio.Usuario;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,4 +30,32 @@ public class Transferencia {
     private LocalDateTime dataCriacao;
     @Version
     private Long version;
+
+    public Transferencia(TransferenciaRequest transferenciaRequest) {
+        this.valor = transferenciaRequest.getValor();
+        this.pagador = transferenciaRequest.getPagador();
+        this.beneficiario = transferenciaRequest.getBeneficiario();
+    }
+
+    public void realizaTransferencia(Usuario pagador, Usuario beneficiario, AutorizadorService autorizadorService) {
+        validaTransferencia(pagador);
+        autorizaTransferencia(autorizadorService);
+    }
+
+    private void autorizaTransferencia(AutorizadorService autorizadorService) {
+        autorizadorService.autorizaTransferencia(this);
+    }
+
+    private void validaTransferencia(Usuario pagador) {
+        if (pagador.getTipoUsuario().equals(TipoUsuario.LOJISTA) || pagador.getId().equals(this.beneficiario)){
+            throw APIException.negocio("Você não possui autorização para realizar essa operação");
+        }
+       verificaSaldoDisponivel(pagador);
+    }
+
+    private void verificaSaldoDisponivel(Usuario pagador) {
+        if (pagador.getCarteira().compareTo(this.valor) < 0) {
+            throw APIException.saldoInsuficiente("Saldo insuficiente para realizar a transferência.");
+        }
+    }
 }
