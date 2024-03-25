@@ -1,8 +1,6 @@
 package com.picpay.usuario.application.api;
 
 import com.picpay.usuario.dominio.TipoUsuario;
-import lombok.Getter;
-import lombok.ToString;
 import lombok.Value;
 
 import javax.validation.constraints.Email;

@@ -5,6 +5,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @Repository
 @RequiredArgsConstructor
 @Log4j2
@@ -16,5 +19,13 @@ public class UsuarioInfraRepository implements UsuarioRepository {
         usuarioSpringDataJPA.save(usuario);
         log.info("[finaliza] UsuarioInfraRepository - salva");
         return usuario;
+    }
+
+    @Override
+    public Usuario buscaUsuarioPorId(UUID idUsuario) {
+        log.info("[inicia] UsuarioInfraRepository - buscaUsuarioPorId");
+        Optional<Usuario> usuario = usuarioSpringDataJPA.findById(idUsuario);
+        log.info("[finaliza] UsuarioInfraRepository - buscaUsuarioPorId");
+        return usuario.orElseThrow(() -> new RuntimeException("Usuario não encontrado!"));
     }
 }

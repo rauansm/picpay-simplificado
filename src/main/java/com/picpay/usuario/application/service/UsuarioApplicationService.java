@@ -29,6 +29,6 @@ public class UsuarioApplicationService implements UsuarioService {
         log.info("[inicia] UsuarioApplicationService - buscaUsuarioPorId");
         Usuario usuario = usuarioRepository.buscaUsuarioPorId(idUsuario);
         log.info("[finaliza] UsuarioApplicationService - buscaUsuarioPorId");
-        return null;
+        return new UsuarioDetalhadoResponse(usuario);
     }
 }
