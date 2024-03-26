@@ -7,6 +7,7 @@ senha varchar(30) not null,
 tipo_usuario varchar(20) not null,
 carteira decimal(20,2) not null,
 data_cadastro timestamp not null,
+version bigint not null,
 
 primary key (id));
 

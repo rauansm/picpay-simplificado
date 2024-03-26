@@ -4,7 +4,6 @@ import com.picpay.core.beanvalidation.CnpjGroup;
 import com.picpay.core.beanvalidation.CpfGroup;
 import com.picpay.core.beanvalidation.UsuarioGroupSequenceProvider;
 import com.picpay.usuario.application.api.UsuarioRequest;
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -12,6 +11,7 @@ import org.hibernate.validator.constraints.br.CNPJ;
 import org.hibernate.validator.constraints.br.CPF;
 import org.hibernate.validator.group.GroupSequenceProvider;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -40,6 +40,8 @@ public class Usuario {
     @Column(name = "tipo_usuario")
     private TipoUsuario tipoUsuario;
     private BigDecimal carteira;
+    @Version
+    private Long version;
 
     public Usuario(UsuarioRequest usuarioRequest) {
         this.nome = usuarioRequest.getNomeCompleto();
@@ -49,5 +51,13 @@ public class Usuario {
         this.tipoUsuario = usuarioRequest.getTipoUsuario();
         this.carteira = BigDecimal.ZERO;
 
+    }
+
+    public void debitar(BigDecimal valor) {
+     this.carteira = this.carteira.subtract(valor);
+    }
+
+    public void creditar(BigDecimal valor) {
+      this.carteira = this.carteira.add(valor);
     }
 }

@@ -25,9 +25,15 @@ public class TransferenciaApplicationService implements TransferenciaService {
         log.info("[inicia] TransferenciaApplicationService - realizaTransferencia");
         Usuario pagador = usuarioRepository.buscaUsuarioPorId(transferenciaRequest.getPagador());
         Usuario beneficiario = usuarioRepository.buscaUsuarioPorId(transferenciaRequest.getBeneficiario());
+
         Transferencia transferencia = new Transferencia(transferenciaRequest);
         transferencia.realizaTransferencia(pagador,beneficiario,autorizadorService);
+
+        transferenciaRepository.salva(transferencia);
+        usuarioRepository.salva(pagador);
+        usuarioRepository.salva(beneficiario);
+
         log.info("[finaliza] TransferenciaApplicationService - realizaTransferencia");
-        return null;
+        return new TransferenciaResponse(transferencia);
     }
 }

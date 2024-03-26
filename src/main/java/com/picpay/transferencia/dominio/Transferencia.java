@@ -5,11 +5,11 @@ import com.picpay.handler.APIException;
 import com.picpay.transferencia.application.api.TransferenciaRequest;
 import com.picpay.usuario.dominio.TipoUsuario;
 import com.picpay.usuario.dominio.Usuario;
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -28,8 +28,6 @@ public class Transferencia {
     @CreationTimestamp
     @Column(name = "data_criacao")
     private LocalDateTime dataCriacao;
-    @Version
-    private Long version;
 
     public Transferencia(TransferenciaRequest transferenciaRequest) {
         this.valor = transferenciaRequest.getValor();
@@ -40,6 +38,8 @@ public class Transferencia {
     public void realizaTransferencia(Usuario pagador, Usuario beneficiario, AutorizadorService autorizadorService) {
         validaTransferencia(pagador);
         autorizaTransferencia(autorizadorService);
+        pagador.debitar(this.valor);
+        beneficiario.creditar(this.valor);
     }
 
     private void autorizaTransferencia(AutorizadorService autorizadorService) {

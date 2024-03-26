@@ -4,7 +4,6 @@ valor decimal(20,2) not null,
 pagador uuid not null,
 beneficiario uuid not null,
 data_criacao timestamp not null,
-version bigint not null,
 
 primary key (id),
 constraint fk_pagador foreign key  (pagador) references usuario (id),
