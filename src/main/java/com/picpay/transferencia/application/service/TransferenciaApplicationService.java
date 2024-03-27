@@ -1,6 +1,7 @@
 package com.picpay.transferencia.application.service;
 
 import com.picpay.autorizador.application.service.AutorizadorService;
+import com.picpay.notificacao.publicador.PublicadorNotificacao;
 import com.picpay.transferencia.application.api.TransferenciaRequest;
 import com.picpay.transferencia.application.api.TransferenciaResponse;
 import com.picpay.transferencia.dominio.Transferencia;
@@ -19,6 +20,7 @@ public class TransferenciaApplicationService implements TransferenciaService {
     private final TransferenciaRepository transferenciaRepository;
     private final UsuarioRepository usuarioRepository;
     private final AutorizadorService autorizadorService;
+    private final PublicadorNotificacao publicadorNotificacao;
     @Transactional
     @Override
     public TransferenciaResponse realizaTransferencia(TransferenciaRequest transferenciaRequest) {
@@ -33,6 +35,7 @@ public class TransferenciaApplicationService implements TransferenciaService {
         usuarioRepository.salva(pagador);
         usuarioRepository.salva(beneficiario);
 
+        publicadorNotificacao.notifica(transferencia,beneficiario);
         log.info("[finaliza] TransferenciaApplicationService - realizaTransferencia");
         return new TransferenciaResponse(transferencia);
     }

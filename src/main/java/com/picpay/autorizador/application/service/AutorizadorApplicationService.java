@@ -1,7 +1,7 @@
 package com.picpay.autorizador.application.service;
 
 import com.picpay.autorizador.infra.client.AutorizadorResponse;
-import com.picpay.autorizador.infra.client.SerproClientFeign;
+import com.picpay.autorizador.infra.client.autorizadorClientFeign;
 import com.picpay.handler.APIException;
 import com.picpay.transferencia.dominio.Transferencia;
 import lombok.RequiredArgsConstructor;
@@ -13,16 +13,16 @@ import org.springframework.stereotype.Service;
 @Log4j2
 @RequiredArgsConstructor
 public class AutorizadorApplicationService implements AutorizadorService {
-    private final SerproClientFeign serproClientFeign;
+    private final autorizadorClientFeign autorizadorClientFeign;
     @Override
     public void autorizaTransferencia(Transferencia transferencia) {
         log.debug("[inicia] AutorizadorApplicationService - autorizaTransferencia");
-        try {
-            ResponseEntity<AutorizadorResponse> autorizador = serproClientFeign.autorizaTransferencia();
-            autorizar(autorizador);
-        }catch (Exception e){
-            throw APIException.tranferenciaNaoAutorizada("Serviço indisponivel");
-        }
+           try {
+               ResponseEntity<AutorizadorResponse> autorizador = autorizadorClientFeign.autorizaTransferencia();
+               autorizar(autorizador);
+           }catch (Exception ex){
+               throw APIException.servicoIndisponivel("O sistema autorizador está temporariamente indisponível.",ex);
+           }
         log.debug("[finaliza] AutorizadorApplicationService - autorizaTransferencia");
     }
 

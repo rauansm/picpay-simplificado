@@ -47,6 +47,9 @@ public class APIException extends RuntimeException {
 	public static APIException saldoInsuficiente(String message) {
 		return new APIException(HttpStatus.BAD_REQUEST, message, ProblemType.SALDO_INSUFICIENTE);
 	}
+	public static APIException servicoIndisponivel(String message, Exception ex) {
+		return new APIException(HttpStatus.SERVICE_UNAVAILABLE, message,ex, ProblemType.SERVICO_INDISPONIVEL);
+	}
 	public static APIException dadosDuplicados(String message) {
 		return new APIException(HttpStatus.BAD_REQUEST, message, ProblemType.REGISTRO_DUPLICADO);
 	}

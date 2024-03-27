@@ -5,6 +5,7 @@ import com.picpay.handler.APIException;
 import com.picpay.transferencia.application.api.TransferenciaRequest;
 import com.picpay.usuario.dominio.TipoUsuario;
 import com.picpay.usuario.dominio.Usuario;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -16,7 +17,7 @@ import java.util.UUID;
 
 @Entity
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Transferencia {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -37,7 +38,7 @@ public class Transferencia {
 
     public void realizaTransferencia(Usuario pagador, Usuario beneficiario, AutorizadorService autorizadorService) {
         validaTransferencia(pagador);
-        autorizaTransferencia(autorizadorService);
+//        autorizaTransferencia(autorizadorService);
         pagador.debitar(this.valor);
         beneficiario.creditar(this.valor);
     }

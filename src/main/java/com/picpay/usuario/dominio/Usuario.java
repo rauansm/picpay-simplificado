@@ -4,6 +4,7 @@ import com.picpay.core.beanvalidation.CnpjGroup;
 import com.picpay.core.beanvalidation.CpfGroup;
 import com.picpay.core.beanvalidation.UsuarioGroupSequenceProvider;
 import com.picpay.usuario.application.api.UsuarioRequest;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -18,7 +19,7 @@ import java.util.UUID;
 
 @Entity
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 @GroupSequenceProvider(UsuarioGroupSequenceProvider.class)
 public class Usuario {
     @Id
