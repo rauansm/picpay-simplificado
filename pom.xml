@@ -17,6 +17,7 @@
 		<java.version>17</java.version>
 		<!-- SPRING CLOUD -->
 		<spring-cloud.version>2021.0.3</spring-cloud.version>
+		<spring-doc.version>1.6.1</spring-doc.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -62,6 +63,12 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
+		</dependency>
+		<!--  Swagger-->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>${spring-doc.version}</version>
 		</dependency>
 
 		<dependency>

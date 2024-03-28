@@ -38,7 +38,7 @@ public class Transferencia {
 
     public void realizaTransferencia(Usuario pagador, Usuario beneficiario, AutorizadorService autorizadorService) {
         validaTransferencia(pagador);
-//        autorizaTransferencia(autorizadorService);
+        autorizaTransferencia(autorizadorService);
         pagador.debitar(this.valor);
         beneficiario.creditar(this.valor);
     }

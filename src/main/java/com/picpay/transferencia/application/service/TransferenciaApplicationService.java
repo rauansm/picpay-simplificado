@@ -48,6 +48,6 @@ public class TransferenciaApplicationService implements TransferenciaService {
         log.info("[inicia] TransferenciaApplicationService - listaTodasTransferencias");
         List<Transferencia> transferencias = transferenciaRepository.listaTodasTransferencias();
         log.info("[finaliza] TransferenciaApplicationService - listaTodasTransferencias");
-        return null;
+        return TransferenciaDetalhadaResponse.converte(transferencias);
     }
 }

@@ -54,3 +54,10 @@ spring:
 picpay:
   email:
     remetente: PicPay <naoresponderbeneficios@outlook.com.br>
+
+springdoc:
+  api-docs:
+    path: /api-docs
+
+  swagger-ui:
+    path: /public/swagger
