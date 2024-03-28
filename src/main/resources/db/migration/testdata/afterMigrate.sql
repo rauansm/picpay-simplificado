@@ -1,7 +1,7 @@
 set session_replication_role = 'replica';
 
 delete from usuario;
-
+delete from transferencia;
 set session_replication_role = 'origin';
 
 insert into usuario (id,nome,email,cpf_cnpj,senha,tipo_usuario,carteira,data_cadastro,version)
