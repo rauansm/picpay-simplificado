@@ -7,6 +7,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+
 @Value
 public class UsuarioRequest {
     @NotBlank(message = "Nome é obrigatório")

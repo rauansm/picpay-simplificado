@@ -1,0 +1,30 @@
+<html>
+<body style="font: 14px Arial, Helvetica, sans-serif">
+<h1 style="color: green; font-size: 26px">Transferencia Recebida!</h1>
+
+<p style="color: black; font-weight: bold">${transferencia.beneficiario.nome}, você recebeu uma transferencia.</p>
+
+<table cellspacing="0" cellpadding="0" border="0">
+    <tr>
+        <td style="vertical-align: middle;"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/PicPay_Logogrande.png"  width="308" height="140"></td>
+
+    </tr>
+</table>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0"
+       style="max-width: 400px; color: #6F6F6F">
+
+    <tr>
+        <td style="padding: 10px 0">Valor</td>
+        <td>${transferencia.transferencia.valor?string.currency}</td>
+    </tr>
+    <tr style="font-weight: bold">
+        <td style="padding: 10px 0">Saldo Disponível</td>
+        <td>${transferencia.beneficiario.carteira?string.currency}</td>
+    </tr>
+</table>
+
+<h2 style="font-size: 20px; color: black">PicPay</h2>
+</body>
+</html>

@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.TransactionSystemException;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -22,6 +23,8 @@ public class UsuarioInfraRepository implements UsuarioRepository {
             usuarioSpringDataJPA.save(usuario);
         } catch (DataIntegrityViolationException e){
             throw APIException.dadosDuplicados("Usuário já cadastrado.");
+        } catch (TransactionSystemException e) {
+            throw APIException.negocio("CPF/CNPJ inválido.");
         }
         log.info("[finaliza] UsuarioInfraRepository - salva");
         return usuario;

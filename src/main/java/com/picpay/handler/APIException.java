@@ -41,10 +41,14 @@ public class APIException extends RuntimeException {
 	public static APIException entidadeNaoEncontrada(String message) {
 		return new APIException(HttpStatus.NOT_FOUND, message, ProblemType.RECURSO_NAO_ENCONTRADO);
 	}
-
-	public static APIException build(HttpStatus statusException, String message, Exception e, ProblemType title) {
-		log.error("Exception: ", e);
-		return new APIException(statusException, message, e, title);
+	public static APIException tranferenciaNaoAutorizada(String message) {
+		return new APIException(HttpStatus.UNAUTHORIZED, message, ProblemType.TRANSFERENCIA_NAO_AUTORIZADA);
+	}
+	public static APIException saldoInsuficiente(String message) {
+		return new APIException(HttpStatus.BAD_REQUEST, message, ProblemType.SALDO_INSUFICIENTE);
+	}
+	public static APIException servicoIndisponivel(String message, Exception ex) {
+		return new APIException(HttpStatus.SERVICE_UNAVAILABLE, message,ex, ProblemType.SERVICO_INDISPONIVEL);
 	}
 	public static APIException dadosDuplicados(String message) {
 		return new APIException(HttpStatus.BAD_REQUEST, message, ProblemType.REGISTRO_DUPLICADO);
