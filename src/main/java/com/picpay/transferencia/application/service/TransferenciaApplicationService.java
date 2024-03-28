@@ -2,6 +2,7 @@ package com.picpay.transferencia.application.service;
 
 import com.picpay.autorizador.application.service.AutorizadorService;
 import com.picpay.notificacao.publicador.PublicadorNotificacao;
+import com.picpay.transferencia.application.api.TransferenciaDetalhadaResponse;
 import com.picpay.transferencia.application.api.TransferenciaRequest;
 import com.picpay.transferencia.application.api.TransferenciaResponse;
 import com.picpay.transferencia.dominio.Transferencia;
@@ -12,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -38,5 +41,13 @@ public class TransferenciaApplicationService implements TransferenciaService {
         publicadorNotificacao.notifica(transferencia,beneficiario);
         log.info("[finaliza] TransferenciaApplicationService - realizaTransferencia");
         return new TransferenciaResponse(transferencia);
+    }
+
+    @Override
+    public List<TransferenciaDetalhadaResponse> listaTodasTransferencias() {
+        log.info("[inicia] TransferenciaApplicationService - listaTodasTransferencias");
+        List<Transferencia> transferencias = transferenciaRepository.listaTodasTransferencias();
+        log.info("[finaliza] TransferenciaApplicationService - listaTodasTransferencias");
+        return null;
     }
 }
