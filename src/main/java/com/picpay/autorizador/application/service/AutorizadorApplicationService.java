@@ -1,7 +1,7 @@
 package com.picpay.autorizador.application.service;
 
+import com.picpay.autorizador.infra.client.AutorizadorClientFeign;
 import com.picpay.autorizador.infra.client.AutorizadorResponse;
-import com.picpay.autorizador.infra.client.autorizadorClientFeign;
 import com.picpay.handler.APIException;
 import com.picpay.transferencia.dominio.Transferencia;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @Log4j2
 @RequiredArgsConstructor
 public class AutorizadorApplicationService implements AutorizadorService {
-    private final autorizadorClientFeign autorizadorClientFeign;
+    private final AutorizadorClientFeign autorizadorClientFeign;
     @Override
     public void autorizaTransferencia(Transferencia transferencia) {
         log.debug("[inicia] AutorizadorApplicationService - autorizaTransferencia");
