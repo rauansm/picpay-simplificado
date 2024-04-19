@@ -1,4 +1,4 @@
-# 🗳 Desafio PicPay Backend Sênior
+# 💚 Desafio PicPay Backend Sênior
 
 ## 📑 Sobre o Projeto
 Projeto elaborado para solucionar esse desafio https://github.com/PicPay/picpay-desafio-backend para uma vaga backend com perfil sênior. A solução desenvolvida é basicamente uma versão simplificada do PicPay.
