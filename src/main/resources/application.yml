@@ -2,8 +2,18 @@ server:
   servlet:
     context-path: /picpay
 
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+
 logging:
   level:
+    root: ${LOG_LEVEL:INFO}
+    org.springframework.web: ${LOG_LEVEL:INFO}
+    org.hibernate: ${LOG_LEVEL:INFO}
     com.picpay: ${LOG_LEVEL:DEBUG}
 
 spring:
@@ -50,6 +60,10 @@ spring:
     port: 587
     username: apikey
     password: ${SENDGRID_API_KEY}
+
+autorizador:
+  api:
+    server: https://run.mocky.io/v3/5794d450-d2e2-4412-8131-73d0293ac1cc
 
 picpay:
   email:
